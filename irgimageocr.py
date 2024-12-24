@@ -7,15 +7,15 @@ import pytesseract
 # Set Tesseract CMD if required
 pytesseract.pytesseract.tesseract_cmd = r'C:\Users\Rajaguru Irusan\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 
-st.title("GUVI Final Project: Image OCR and Preprocessing - IRG")
+st.title("re-imagine your pictures using ai preprocessing technics")
 
 # Image upload
-uploaded_image = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
+uploaded_image = st.file_uploader("upload an image", type=["jpg", "jpeg", "png"])
 
 if uploaded_image is not None:
     # Read and display the uploaded image
     image = Image.open(uploaded_image)
-    st.image(image, caption="Uploaded Image", use_container_width=True)
+    st.image(image, caption="uploaded image", use_container_width=True)
 
     # Convert to OpenCV format
     image = np.array(image)
@@ -80,25 +80,33 @@ if uploaded_image is not None:
         "CLAHE"
     ]
 
-    selected_method = st.selectbox("Select Preprocessing Method", methods)
+    selected_method = st.selectbox("select preprocessing method", methods)
 
     # Display the selected preprocessed image
     processed_image = preprocess_image(selected_method)
     st.image(processed_image, caption=f"{selected_method} Image", use_container_width=True, channels="GRAY" if selected_method != "Original" else "RGB")
 
     # Perform OCR if the image contains text
-    st.subheader("Extracted Text")
+    st.subheader("extracted text")
     ocr_result = pytesseract.image_to_string(image)
 
     if ocr_result.strip():
-        st.text_area("Extracted Text", value=ocr_result, height=200)
+        st.text_area("extracted text", value=ocr_result, height=200)
 
         # Add download button for extracted text
         st.download_button(
-            label="Download Extracted Text",
+            label="download extracted text",
             data=ocr_result,
             file_name="extracted_text.txt",
             mime="text/plain"
         )
     else:
-        st.info("No text detected in the uploaded image.")
+        st.info("no text detected in the uploaded image.")
+
+st.markdown(
+        """
+        **app by:** [rajaguru irusan](https://www.linkedin.com/in/rajaguruirusan)
+        
+        - **follow me in** [GitHub](https://github.com/rajaguruirusan)
+        """
+    )

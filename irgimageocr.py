@@ -5,7 +5,7 @@ from PIL import Image
 import pytesseract
 
 # Set Tesseract CMD if required
-pytesseract.pytesseract.tesseract_cmd = r'C:\Users\Rajaguru Irusan\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
 
 st.title("re-imagine your pictures using ai preprocessing technics")
 
